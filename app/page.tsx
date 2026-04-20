@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import {
   ArrowRight,
   Sparkles,
@@ -145,13 +144,10 @@ export default function MakacoSiteRedesign() {
       <div className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-neutral-950/75 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <a href="#inicio" className="flex flex-col items-start leading-none">
-            <Image
-              src="/bwo.svg"
+            <img
+              src="bwo.svg"
               alt="BWO"
-              width={50}
-              height={20}
               className="h-10 w-auto md:h-12"
-              priority
             />
             <div className="mt-1 text-[10px] uppercase tracking-[0.45em] text-white/45 md:text-xs">
               Think. we create
