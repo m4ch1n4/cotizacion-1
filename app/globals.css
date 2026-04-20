@@ -24,3 +24,59 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.caution-stage {
+  width: 100%;
+  overflow: hidden;
+  padding: 12px 0;
+  background: #050505;
+}
+
+.caution-tape {
+  width: 120vw;
+  margin-left: -10vw;
+  overflow: hidden;
+  border-top: 6px solid #111;
+  border-bottom: 6px solid #111;
+  background: repeating-linear-gradient(-45deg, #f3d21b 0 24px, #111 24px 40px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), inset 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.caution-rail {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  padding: 12px 0;
+  animation: caution-marquee 20s linear infinite;
+}
+
+.caution-item {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin-right: 24px;
+  padding: 8px 20px;
+  background: #111;
+  color: #f3d21b;
+  font-size: clamp(20px, 2.6vw, 38px);
+  line-height: 1;
+  font-weight: 700;
+  font-family: var(--font-oswald), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 3px solid #111;
+  box-shadow: 0 0 0 3px #f3d21b;
+}
+
+.caution-item span {
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+@keyframes caution-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

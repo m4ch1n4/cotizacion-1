@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   ArrowRight,
   Sparkles,
@@ -17,6 +18,7 @@ import {
   Phone,
   CheckCircle2,
 } from "lucide-react";
+import DarkVeil from "@/components/DarkVeil";
 
 const services = [
   {
@@ -128,17 +130,31 @@ function SectionTitle({
 }
 
 export default function MakacoSiteRedesign() {
+  const [dynamicHueShift, setDynamicHueShift] = useState(-155);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDynamicHueShift((prev) => (prev >= -145 ? -155 : prev + 0.15));
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-neutral-950 text-white">
       <div className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-neutral-950/75 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="#inicio" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/15 bg-white/5 text-sm font-semibold">
-              M
-            </div>
-            <div>
-              <div className="text-sm font-semibold tracking-[0.2em] text-white/90">MAKACO MG</div>
-              <div className="text-xs text-white/45">Think. We create.</div>
+          <a href="#inicio" className="flex flex-col items-start leading-none">
+            <Image
+              src="/bwo.svg"
+              alt="BWO"
+              width={50}
+              height={20}
+              className="h-10 w-auto md:h-12"
+              priority
+            />
+            <div className="mt-1 text-[10px] uppercase tracking-[0.45em] text-white/45 md:text-xs">
+              Think. we create
             </div>
           </a>
 
@@ -168,10 +184,20 @@ export default function MakacoSiteRedesign() {
       </div>
 
       <section id="inicio" className="relative overflow-hidden pt-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_28%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.08),transparent_22%),linear-gradient(180deg,#111111_0%,#0a0a0a_100%)]" />
-        <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-white/10 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 z-0 opacity-90">
+          <DarkVeil
+            hueShift={dynamicHueShift}
+            noiseIntensity={0.07}
+            scanlineIntensity={0.0}
+            speed={2.2}
+            scanlineFrequency={0.0}
+            warpAmount={2.8}
+          />
+        </div>
+        <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_28%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.08),transparent_22%),linear-gradient(180deg,rgba(17,17,17,0.72)_0%,rgba(10,10,10,0.86)_100%)]" />
+        <div className="absolute left-1/2 top-24 z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-white/10 blur-3xl" />
 
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-10 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:pb-28">
+        <div className="relative z-20 mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-10 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:pb-28">
           <div className="space-y-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -397,9 +423,21 @@ export default function MakacoSiteRedesign() {
         </div>
       </section>
 
+      <div className="caution-stage" aria-label="Caution marquee">
+        <div className="caution-tape">
+          <div className="caution-rail">
+            {Array.from({ length: 10 }).map((_, index) => (
+              <div key={index} className="caution-item">
+                <span>CAUTION MOnkey Bussines</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <footer className="border-t border-white/10 px-6 py-8 text-sm text-white/45 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>Makaco MG - estrategia, diseño, producción y tecnología aplicada para experiencias de marca.</div>
+          <div>Makaco - estrategia, diseño, producción y tecnología aplicada para experiencias de marca.</div>
           <div>Home rediseñada con una narrativa más clara, más sólida y con mejor lectura comercial.</div>
         </div>
       </footer>
